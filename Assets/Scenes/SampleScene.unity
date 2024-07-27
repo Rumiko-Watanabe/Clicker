@@ -452,19 +452,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2252dd0f75d3b41ace2b49f4673723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  lvl: 1
-  click: 5
-  upgrade: 20
-  clickMultiplier: 2
-  upgMultiplier: 4
-  scoreText: {fileID: 1859017482}
-  lvlText: {fileID: 382375972}
-  clickText: {fileID: 804982222}
-  upgradeText: {fileID: 640983028}
-  btnUpgrade: {fileID: 1562804019}
-  money: {fileID: 1710494412174136539, guid: 2f830f3b7f8794a4f9c0f28dcd3c9c37, type: 3}
-  mainCamera: {fileID: 519420031}
+  _score: 0
+  _lvl: 1
+  _click: 5
+  _upgrade: 20
+  _clickMultiplier: 2
+  _upgMultiplier: 4
+  _scoreText: {fileID: 1859017482}
+  _lvlText: {fileID: 382375972}
+  _clickText: {fileID: 804982222}
+  _upgradeText: {fileID: 640983028}
+  _btnUpgrade: {fileID: 1562804019}
+  _money: {fileID: 1710494412174136539, guid: 2f830f3b7f8794a4f9c0f28dcd3c9c37, type: 3}
+  _mainCamera: {fileID: 519420031}
 --- !u!1 &640983026
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,38 +4,38 @@ using UnityEngine.UI;
 public class Main : MonoBehaviour
 {
     // Переменные для хранения текущего счета, уровня, очков за клик, стоимости апгрейда, множителей для кликов и апгрейдов
-    [SerializeField] int score;
-    [SerializeField] int lvl = 1;
-    [SerializeField] int click = 5;
-    [SerializeField] int upgrade = 20;
-    [SerializeField] int clickMultiplier = 2;
-    [SerializeField] int upgMultiplier = 4;
+    [SerializeField] private int _score;
+    [SerializeField] private int _lvl = 1;
+    [SerializeField] private int _click = 5;
+    [SerializeField] private int _upgrade = 20;
+    [SerializeField] private int _clickMultiplier = 2;
+    [SerializeField] private int _upgMultiplier = 4;
 
     // Текстовые поля для отображения значений счета, уровня, очков за клик и стоимости апгрейда
-    [SerializeField] Text scoreText;
-    [SerializeField] Text lvlText;
-    [SerializeField] Text clickText;
-    [SerializeField] Text upgradeText;
+    [SerializeField] private Text _scoreText;
+    [SerializeField] private Text _lvlText;
+    [SerializeField] private Text _clickText;
+    [SerializeField] private Text _upgradeText;
 
     // Кнопка апгрейда и деньги
-    [SerializeField] GameObject btnUpgrade;
-    [SerializeField] GameObject money;
+    [SerializeField] private GameObject _btnUpgrade;
+    [SerializeField] private GameObject _money;
 
     // Основная камера для преобразования координат экрана в мировые координаты
-    [SerializeField] Camera mainCamera;
+    [SerializeField] private Camera _mainCamera;
 
     // Проверка, может ли кнопка апгрейда быть активной
     private void UpgradeCheck()
     {
         // Если очков недостаточно для апгрейда, отключаем кнопку
-        if (upgrade > score)
+        if (_upgrade > _score)
         {
-            btnUpgrade.SetActive(false);
+            _btnUpgrade.SetActive(false);
         }
         else
         {
             // Если очков достаточно, включаем кнопку
-            btnUpgrade.SetActive(true);
+            _btnUpgrade.SetActive(true);
         }
     }
 
@@ -44,7 +44,7 @@ public class Main : MonoBehaviour
     {
         try
         {
-            score = checked(score + click);     // Увеличиваем счет на заданное количество очков за клик    
+            _score = checked(_score + _click);     // Увеличиваем счет на заданное количество очков за клик    
             SpawnMoney();                       // Спауним деньги
             UpgradeCheck();                     // Проверяем, можно ли активировать кнопку апгрейда
         }
@@ -53,9 +53,9 @@ public class Main : MonoBehaviour
             // Если произошло переполнение, выводим сообщение об ошибке в консоль
             Debug.LogError("Overflow occurred while adding score: " + e.Message);
             // Сбрасываем очки за клик, стоимость апгрейда и счет до начальных значений
-            click = 5;
-            upgrade = 20;
-            score = 0;
+            _click = 5;
+            _upgrade = 20;
+            _score = 0;
         }
 
     }
@@ -65,10 +65,10 @@ public class Main : MonoBehaviour
     {
         try
         {
-            score -= upgrade;           // Уменьшаем счет на стоимость апгрейда
-            click *= clickMultiplier;   // Увеличиваем количество очков за клик с учетом множителя
-            upgrade *= upgMultiplier;   // Увеличиваем стоимость следующего апгрейда с учетом множителя
-            lvl++;                      // Увеличиваем уровень
+            _score -= _upgrade;           // Уменьшаем счет на стоимость апгрейда
+            _click *= _clickMultiplier;   // Увеличиваем количество очков за клик с учетом множителя
+            _upgrade *= _upgMultiplier;   // Увеличиваем стоимость следующего апгрейда с учетом множителя
+            _lvl++;                      // Увеличиваем уровень
             UpgradeCheck();             // Проверяем, можно ли активировать кнопку апгрейда
         }            
         catch (System.OverflowException e)
@@ -76,9 +76,9 @@ public class Main : MonoBehaviour
             // Если произошло переполнение, выводим сообщение об ошибке в консоль
             Debug.LogError("Overflow occurred while adding score: " + e.Message);
             // Сбрасываем очки за клик, стоимость апгрейда и счет до начальных значений
-            click = 5;
-            upgrade = 20;
-            score = 0;
+            _click = 5;
+            _upgrade = 20;
+            _score = 0;
         }
     }
 
@@ -87,8 +87,8 @@ public class Main : MonoBehaviour
     {
         // Преобразуем координаты экрана в мировые координаты и создаем деньги на этой позиции
         Instantiate(
-            money,
-            mainCamera.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward,
+            _money,
+            _mainCamera.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward,
             Quaternion.identity
         );
     }
@@ -96,9 +96,9 @@ public class Main : MonoBehaviour
     // Обновление состояния объектов каждый кадр
     void Update()
     {
-        scoreText.text = score.ToString();                  // Обновляем текст счета
-        lvlText.text = "LV " + lvl.ToString();              // Обновляем текст уровня
-        clickText.text = "+" + click.ToString();            // Обновляем текст очков за клик
-        upgradeText.text = "UPGRADE " + upgrade.ToString(); // Обновляем текст стоимости апгрейда
+        _scoreText.text = _score.ToString();                  // Обновляем текст счета
+        _lvlText.text = "LV " + _lvl.ToString();              // Обновляем текст уровня
+        _clickText.text = "+" + _click.ToString();            // Обновляем текст очков за клик
+        _upgradeText.text = "UPGRADE " + _upgrade.ToString(); // Обновляем текст стоимости апгрейда
     }
 }

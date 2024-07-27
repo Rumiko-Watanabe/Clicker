@@ -3,10 +3,10 @@ using UnityEngine;
 public class Money : MonoBehaviour
 {
     // Скорость полета, падения и вращения, а также потолок по оси Y
-    [SerializeField] float flySpeed = 6;
-    [SerializeField] float fallSpeed = 7;
-    [SerializeField] float rotationSpeed = 1700;
-    [SerializeField] float Ymax = 3;
+    [SerializeField] private float _flySpeed = 6;
+    [SerializeField] private float _fallSpeed = 7;
+    [SerializeField] private float _rotationSpeed = 1700;
+    [SerializeField] private float _Ymax = 3;
 
     // Случайное направление и вращение, флаг для проверки, падает ли объект
     private Vector3 randomDirection;
@@ -25,8 +25,8 @@ public class Money : MonoBehaviour
 
         // Генерация случайного значения для вращения
         randomRotation = Random.Range(
-            -rotationSpeed,
-            rotationSpeed
+            -_rotationSpeed,
+            _rotationSpeed
         );
     }
 
@@ -36,7 +36,7 @@ public class Money : MonoBehaviour
         if (!isFalling)
         {
             // Объект движется в случайном направлении с заданной скоростью полета
-            transform.position += randomDirection * flySpeed * Time.deltaTime;
+            transform.position += randomDirection * _flySpeed * Time.deltaTime;
 
             // Объект вращается с заданной скоростью вращения
             transform.Rotate(
@@ -45,7 +45,7 @@ public class Money : MonoBehaviour
             );
 
             // Проверка, достиг ли объект потолка по оси Y
-            if (transform.position.y >= Ymax)
+            if (transform.position.y >= _Ymax)
             {
                 isFalling = true; // Если достиг, включаем режим падения
             }
@@ -53,7 +53,7 @@ public class Money : MonoBehaviour
         else
         {
             // Объект падает вниз с заданной скоростью падения
-            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+            transform.position += Vector3.down * _fallSpeed * Time.deltaTime;
 
             // Объект продолжает вращаться с заданной скоростью вращения
             transform.Rotate(
